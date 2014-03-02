@@ -1,5 +1,5 @@
-guprecords (0.0.0.0) stable; urgency=low
+guprecords (0.1.0) stable; urgency=low
 
-  * Initial version of the template
+  * Initial release
 
- -- Paul Buetow <paul@buetow.org>  Fri, 04 Jan 2013 07:53:32 +0100
+ -- Paul Buetow <paul@buetow.org>  Sun, 02 Mar 2014 13:32:05 +0100
