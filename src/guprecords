@@ -9,10 +9,10 @@ use v5.14;
 use Getopt::Long;
 use POSIX qw(strftime);
 
-my $VERSION = 'VERSION_DEVEL';
-my $FLAG = 0;
+our $VERSION = 'VERSION_DEVEL';
+our $FLAG = 0;
 
-my %ARGS = (
+our %ARGS = (
   all => 0,
   total => 0,
   reverse => 0,
@@ -21,7 +21,7 @@ my %ARGS = (
   'indir=s' => '.',
 );
 
-my %OPTS = map { $_ => \$ARGS{$_} } keys %ARGS;
+our %OPTS = map { $_ => \$ARGS{$_} } keys %ARGS;
 GetOptions %OPTS or die "Error in command line arguments. Try --help";
 
 sub help() {
@@ -33,7 +33,6 @@ sub help() {
 
 sub uptime($) {
   my $uptime = shift;
-
   my ($s,$m,$h,undef,undef,$y,undef,$d) = localtime($uptime);
 
   $y -= 70;
@@ -55,6 +54,7 @@ sub trimlen($$) {
 sub out(\@;$) {
   my ($records,$show_bt) = @_;
 
+  $FLAG = 1;
   my $count = 0;
 
   printf "%3s | %17s | %20s | %13s | %24s\n",
@@ -81,8 +81,6 @@ sub out(\@;$) {
       sort { $a->{uptime} <=> $b->{uptime} } @$records
     }
   };
-
-  $FLAG = 1;
 }
 
 sub all() {
