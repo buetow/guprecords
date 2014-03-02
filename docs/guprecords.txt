@@ -49,7 +49,7 @@ NAME
     like cron or puppet.
 
 LICENSE
-    Se package description or project website.
+    See package description or project website.
 
 AUTHOR
     Paul Buetow - <http://guprecords.buetow.org>
