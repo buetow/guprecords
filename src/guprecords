@@ -1,3 +1,157 @@
-#!/bin/bash
+#!/usr/bin/env perl
+# guprecords (c) 2014, Paul Buetow
+# E-Mail: guprecords@mx.buetow.org WWW: http://guprecords.buetow.org
 
-echo "Hello World, I am a fake project"
+use strict;
+use warnings;
+use v5.14;
+
+use Getopt::Long;
+use POSIX qw(strftime);
+
+my $VERSION = 'VERSION_DEVEL';
+my $FLAG = 0;
+
+my %ARGS = (
+  all => 0,
+  total => 0,
+  reverse => 0,
+  help => 0,
+  'count=i' => 23,
+  'indir=s' => '.',
+);
+
+my %OPTS = map { $_ => \$ARGS{$_} } keys %ARGS;
+GetOptions %OPTS or die "Error in command line arguments. Try --help";
+
+sub help() {
+  say "Ths is guprecords Version $VERSION";
+  print "Usage: $0\n"; 
+  say "\t--$_" for sort keys %ARGS;
+  say 'Please also consult the guprecords manual page.'
+}
+
+sub uptime($) {
+  my $uptime = shift;
+
+  my ($s,$m,$h,undef,undef,$y,undef,$d) = localtime($uptime);
+
+  $y -= 70;
+  $d += $y * 365;
+
+  sprintf "%3dd %02d:%02d:%02d", $d, $h, $m, $s;
+}
+
+sub trimlen($$) {
+  my ($string,$len) = @_;
+
+  if (length $string > $len) {
+    substr($string, 0, ($len-2)).'..';
+  } else {
+    $string;
+  }
+}
+
+sub out(\@;$) {
+  my ($records,$show_bt) = @_;
+
+  my $count = 0;
+
+  printf "%3s | %17s | %20s | %13s | %24s\n",
+    'Pos',
+    'System',
+    'Kernel',
+    'Uptime',
+    (defined $show_bt ? 'Boot time' : '');
+
+  map {
+    return if $count++ == $ARGS{'count=i'};
+
+    printf "%3d | %17s | %20s | %13s | %24s\n",
+      $count,
+      trimlen($_->{fqdn},17),
+      trimlen($_->{kernel},20),
+      uptime($_->{uptime}),
+      (defined $show_bt ? ''.localtime($_->{bootime}) : '');
+  }
+  do {
+    unless ($ARGS{reverse}) {
+      sort { $b->{uptime} <=> $a->{uptime} } @$records
+    } else {
+      sort { $a->{uptime} <=> $b->{uptime} } @$records
+    }
+  };
+
+  $FLAG = 1;
+}
+
+sub all() {
+  my @records;
+
+  for my $file (<$ARGS{'indir=s'}/*.records>) {
+    my ($fqdn) = $file =~ m#.*/(.*)\.records#;
+
+    my $uptime_total = 0;
+
+    open my $fh, $file or die "$file: $!\n";
+    while (<$fh>) {
+      chomp;
+      my ($uptime,$boot,$kernel) = split ':';
+
+      push @records, {
+        uptime => $uptime,
+        bootime => $boot,
+        kernel => $kernel,
+        fqdn => $fqdn,
+      };
+
+    }
+    close $file;
+
+  }
+
+  out @records, 'show_bt';
+}
+
+sub total() {
+  my @records;
+
+  for my $file (<$ARGS{'indir=s'}/*.records>) {
+    my ($fqdn) = $file =~ m#.*/(.*)\.records#;
+
+    my $uptime_ = 0;
+    my $kernel_;
+
+    my $highest = 0;
+
+    open my $fh, $file or die "$file: $!\n";
+    while (<$fh>) {
+      chomp;
+      my ($uptime,$boot,$kernel) = split ':';
+
+      $uptime_ += $uptime;
+
+       if ($highest < $uptime) {
+        $highest = $uptime;
+        $kernel_ = $kernel;
+      }
+    }
+    close $file;
+
+    push @records, {
+      uptime => $uptime_,
+      kernel => $kernel_,
+      fqdn => $fqdn,
+    };
+
+  }
+
+  out @records;
+}
+
+help if $ARGS{help};
+all if $ARGS{all}; 
+total if $ARGS{total};
+
+help unless $FLAG;
+
