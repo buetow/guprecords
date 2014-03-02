@@ -61,7 +61,7 @@ You may automate the collecting of all the uprecords using something like cron o
 
 =head1 LICENSE
 
-Se package description or project website.
+See package description or project website.
 
 =head1 AUTHOR
 
