@@ -1,15 +1,15 @@
-Source: foo
+Source: guprecords
 Section: utils
 Priority: optional
 Maintainer: Paul Buetow <paul@buetow.org>
 Build-Depends: 
 Standards-Version: 3.9.2
-Homepage: https://template.buetow.org
-Vcs-Git: git://git.buetow.org/template
-Vcs-Browser: http://web.buetow.org/git/?p=template.git;a=summary
+Homepage: https://guprecords.buetow.org
+Vcs-Git: git://git.buetow.org/guprecords
+Vcs-Browser: http://web.buetow.org/git/?p=guprecords.git;a=summary
 
-Package: foo
+Package: guprecords
 Architecture: all
 Depends:
-Description: Small template package
- This is just a template package, which cann print Hello World.
+Description: Shows uprecords of several hosts
+ A tool to show global uprecord stats collected on several hosts using uptimed.

@@ -1,4 +1,4 @@
-NAME=foo
+NAME=guprecords
 all: version documentation build
 
 # THIS IS NEEDED BY THE DEBIAN TOOLS
