@@ -5,7 +5,7 @@ Maintainer: Paul Buetow <paul@buetow.org>
 Build-Depends: 
 Standards-Version: 3.9.2
 Homepage: https://guprecords.buetow.org
-Vcs-Git: https://github.com/rantanplan//guprecords
+Vcs-Git: https://github.com/rantanplan/guprecords
 Vcs-Browser: http://web.buetow.org/git/?p=guprecords.git;a=summary
 
 Package: guprecords
