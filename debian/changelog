@@ -1,3 +1,15 @@
+guprecords (0.1.7) stable; urgency=low
+
+  * Another try to add a Package for Jessie
+
+ -- Paul Buetow <paul@buetow.org>  Sat, 14 Jun 2014 10:55:29 +0200
+
+guprecords (0.1.6) stable; urgency=low
+
+  * Also add Package for Jessie
+
+ -- Paul Buetow <paul@buetow.org>  Sat, 14 Jun 2014 10:49:23 +0200
+
 guprecords (0.1.5) stable; urgency=low
 
   * Typo in manual page fix.
