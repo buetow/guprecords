@@ -1,3 +1,9 @@
+guprecords (0.1.8) stable; urgency=low
+
+  * Merge
+
+ -- Paul Buetow <paul@buetow.org>  Sat, 14 Jun 2014 10:57:19 +0200
+
 guprecords (0.1.7) stable; urgency=low
 
   * Another try to add a Package for Jessie
