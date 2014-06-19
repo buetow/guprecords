@@ -12,14 +12,6 @@ guprecords [--help] [--total|--all] [--count=i] [--indir=s]
 
 =over
 
-=item --help
-
-Shows the help
-
-=item --total
-
-Aggregates a total uptime for every single host.
-
 =item --all
 
 Shows every individual uptime of all hosts.
@@ -28,9 +20,21 @@ Shows every individual uptime of all hosts.
 
 Show i num of entries. Default is 23.
 
+=item --nofqdn
+
+Don't display the FQDNs
+
+=item --help
+
+Shows the help
+
 =item --indir=s
 
 Read all the *.records files from dir s. Default is ./
+
+=item --total
+
+Aggregates a total uptime for every single host.
 
 =back
 

@@ -14,9 +14,10 @@ our $FLAG = 0;
 
 our %ARGS = (
   all => 0,
-  total => 0,
-  reverse => 0,
   help => 0,
+  nofqdn => 0,
+  reverse => 0,
+  total => 0,
   'count=i' => 23,
   'indir=s' => '.',
 );
@@ -67,9 +68,11 @@ sub out(\@;$) {
   map {
     return if $count++ == $ARGS{'count=i'};
 
+    my $name = $ARGS{nofqdn} ? $_->{hostname} : $_->{fqdn};
+
     printf "%3d | %17s | %20s | %13s | %24s\n",
       $count,
-      trimlen($_->{fqdn},17),
+      trimlen($name,17),
       trimlen($_->{kernel},20),
       uptime($_->{uptime}),
       (defined $show_bt ? ''.localtime($_->{bootime}) : '');
@@ -88,6 +91,7 @@ sub all() {
 
   for my $file (<$ARGS{'indir=s'}/*.records>) {
     my ($fqdn) = $file =~ m#.*/(.*)\.records#;
+    my ($hostname) = $fqdn =~m#([^\.]+)#;
 
     my $uptime_total = 0;
 
@@ -97,10 +101,11 @@ sub all() {
       my ($uptime,$boot,$kernel) = split ':';
 
       push @records, {
-        uptime => $uptime,
         bootime => $boot,
-        kernel => $kernel,
         fqdn => $fqdn,
+        hostname => $hostname,
+        kernel => $kernel,
+        uptime => $uptime,
       };
 
     }
