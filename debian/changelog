@@ -1,3 +1,9 @@
+guprecords (0.2.0) stable; urgency=low
+
+  * Add --nofqdn switch, displays only the hostnames and not the FQDNs
+
+ -- Paul Buetow <paul@buetow.org>  Fri, 20 Jun 2014 00:20:35 +0200
+
 guprecords (0.1.8) stable; urgency=low
 
   * Merge
