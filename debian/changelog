@@ -1,3 +1,9 @@
+guprecords (0.2.2) stable; urgency=low
+
+  * Add README.pod for github page
+
+ -- Paul Buetow <paul@buetow.org>  Sun, 22 Jun 2014 11:29:44 +0200
+
 guprecords (0.2.1) stable; urgency=low
 
   * Remove make dput from release Makefile target
