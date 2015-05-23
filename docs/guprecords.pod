@@ -20,6 +20,10 @@ Shows every individual uptime of all hosts.
 
 Show i num of entries. Default is 23.
 
+=item --nocolor
+
+Don't display with ANSI colors
+
 =item --nofqdn
 
 Don't display the FQDNs
@@ -31,6 +35,10 @@ Shows the help
 =item --indir=s
 
 Read all the *.records files from dir s. Default is ./
+
+=item --oldage=i
+
+The number of days until a host is defined as old.
 
 =item --total
 
