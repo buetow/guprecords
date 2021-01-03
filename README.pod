@@ -43,7 +43,7 @@ Aggregates a total uptime for every single host.
 
 =head3 Uptimed
 
-Firstival, you need to collect uprecords using the uptimed deaemon. To install it run:
+First of all, you need to collect uprecords using the uptimed deaemon. To install it run:
 
     sudo aptitude install uptimed
 
